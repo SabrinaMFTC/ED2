@@ -99,30 +99,60 @@ public class BST<T extends Comparable<T>> extends BinaryTree<T> {
 
     public Node<T> findPredecessor(T data) {
         Node<T> node = search(data);
-        if (isEmpty() || node == null || node.isLeaf()) return null;
+        if (node == null) return null;
 
-        Node<T> predecessor = node.getLeft();
-        if (predecessor == null) return node;
-        return findPredecessor(predecessor);
+        // If node is the min value of the tree there is no predecessor
+        if (data.compareTo(findMin().getData()) == 0) return null;
+
+        // If node does not have left subtree
+        if (node.getLeft() == null) {
+            // If parent's data is smaller than data, predecessor is node's parent
+            if (data.compareTo(node.getParent().getData()) > 0) return node.getParent();
+            // If parent's data is bigger than data, go up in the tree
+            else {
+                while (node.getParent() != null) {
+                    if (data.compareTo(node.getParent().getData()) > 0) return node.getParent();
+                    else node = node.getParent();
+                }
+                // If node doesn't have predecessor
+                return null;
+            }
+
+        // If node has left subtree
+        } else return findPredecessor(node.getLeft());
     }
 
     private Node<T> findPredecessor(Node<T> node) {
-        if (node == null) return null;
         if (node.getRight() == null) return node;
         return findPredecessor(node.getRight());
     }
 
     public Node<T> findSuccessor(T data) {
         Node<T> node = search(data);
-        if (isEmpty() || node == null || node.isLeaf()) return null;
+        if (node == null) return null;
 
-        Node<T> successor = node.getRight();
-        if (successor == null) return node;
-        return findSuccessor(successor);
+        // If node is the max value of the tree there is no successor
+        if (data.compareTo(findMax().getData()) == 0) return null;
+
+        // If node does not have right subtree
+        if (node.getRight() == null) {
+            // If parent's data is bigger than data, successor is node's parent
+            if (data.compareTo(node.getParent().getData()) < 0) return node.getParent();
+            // If parent's data is smaller than data, go up in the tree
+            else {
+                while (node.getParent() != null) {
+                    if (data.compareTo(node.getParent().getData()) < 0) return node.getParent();
+                    else node = node.getParent();
+                }
+                // If node doesn't have successor
+                return null;
+            }
+
+        // If node has right subtree
+        } else return findSuccessor(node.getRight());
     }
 
     private Node<T> findSuccessor(Node<T> node) {
-        if (node == null) return null;
         if (node.getLeft() == null) return node;
         return findSuccessor(node.getLeft());
     }
