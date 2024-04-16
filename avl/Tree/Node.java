@@ -110,7 +110,7 @@ public class Node {
           .append("Degree: " + getDegree() + "\n")
           .append("Level: " + getLevel() + "\n")
           .append("Height: " + getHeight() + "\n")
-          .append("Balance Factor: " + getBalanceFactor() + "\n");
+          .append("Balance Factor: " + getBalanceFactor());
 
         return sb.toString();
     }

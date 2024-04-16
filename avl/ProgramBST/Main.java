@@ -113,7 +113,7 @@ public class Main {
             try {
                 option = Integer.parseInt(input);
                 if (option < 1 || option > 6)
-                    System.out.print("Value must be between 1-7. Please try again.\nOption: ");
+                    System.out.print("Value must be between 1-6. Please try again.\nOption: ");
             } catch (NumberFormatException e) {
                 option = 0;
             }
@@ -130,9 +130,8 @@ public class Main {
                 2. Remove Node
                 3. Show Node Information
                 4. Show Min/Max Values
-                5. Balance Tree
-                6. Clear Tree
-                7. Exit
+                5. Clear Tree
+                6. Exit
                 Option:\s""");
     }
 }
