@@ -5,9 +5,6 @@
    https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-8/Árvore%20AVL.pdf
    https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 */
-
-package src.Tree;
-
 public class AVL extends BST {
 
     public AVL() { super(null); }
@@ -159,8 +156,7 @@ public class AVL extends BST {
                 successor.setParent(null);
             }
         }
-        if (parent == null) balanceTree(root);
-        else balanceTree(parent);
+        balanceTree(parent);
     }
 
     public void balanceTree(Node node) {

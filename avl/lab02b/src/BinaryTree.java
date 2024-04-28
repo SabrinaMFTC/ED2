@@ -5,9 +5,6 @@
    https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-8/Árvore%20AVL.pdf
    https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 */
-
-package src.Tree;
-
 public class BinaryTree {
 
     protected Node root;
@@ -84,5 +81,4 @@ public class BinaryTree {
         postOrderTraversal(node.getRight());
         System.out.print(node.getData() + " ");
     }
-
 }

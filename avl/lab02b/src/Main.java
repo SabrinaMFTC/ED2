@@ -5,15 +5,11 @@
    https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-8/Árvore%20AVL.pdf
    https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 */
-
-package src.ProgramAVL;
-import src.Tree.AVL;
-
 public class Main {
 
     public static void main(String[] args) {
 
-         // a) Inserir, nessa ordem, os nós com chaves 1, 2 e 3.
+        // a) Inserir, nessa ordem, os nós com chaves 1, 2 e 3.
         // Rotation LL
         System.out.println("a) Inserting nodes with keys 1, 2, 3...");
         AVL A = new AVL();
