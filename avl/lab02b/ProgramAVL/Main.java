@@ -6,8 +6,8 @@
    https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 */
 
-package src.ProgramAVL;
-import src.Tree.AVL;
+package ProgramAVL;
+import Tree.*;
 
 public class Main {
 
