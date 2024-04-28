@@ -159,7 +159,8 @@ public class AVL extends BST {
                 successor.setParent(null);
             }
         }
-        balanceTree(parent);
+        if (parent == null) balanceTree(root);
+        else balanceTree(parent);
     }
 
     public void balanceTree(Node node) {
