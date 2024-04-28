@@ -6,7 +6,7 @@
    https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 */
 
-package Tree;
+package src.Tree;
 
 public class BinaryTree {
 
