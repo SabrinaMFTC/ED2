@@ -5,6 +5,9 @@
    https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-8/Árvore%20AVL.pdf
    https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 */
+
+package Tree;
+
 public class BST extends BinaryTree {
 
     public BST() { super(null); }
