@@ -1,13 +1,13 @@
 public interface HashTable {
-    // Methods
+    // Methods signatures
 
-    // Search: A busca deve ser feita pela chave e deve retornar o valor associado à chave, se existir
+    // The search must be done by the key and should return the associated value of the key, if it exists.
     String search(int key);
 
-    // Insert: A inserção deve retornar um de três resultados, sendo que os resultados indicam "chave-valor inserido", "valor da chave atualizado" ou "erro ao inserir chave-valor"
-    void insert(int key, String value);
+    // The insertion should return one of three results, which indicate "key-value inserted", "value of the key updated", or "error inserting key-value".
+    String insert(int key, String value);
 
-    // Remove: A remoção deve ser feita pela chave e deve retornar true se foi possível remover a chave-valor ou false caso contrário.
-    void remove(int key);
+    // The removal must be done by the key and should return true if it was possible to remove the key-value pair or false otherwise.
+    Boolean remove(int key);
 
 }

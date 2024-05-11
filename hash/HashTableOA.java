@@ -10,9 +10,7 @@ public class HashTableOA extends HashTableData implements HashTable {
     }
 
     // Methods
-    public int hashFunction(int key) {
-        return key % size;
-    }
+    public int hashFunction(int key) { return key % size; }
 
     @Override
     public String search(int key) {
@@ -36,7 +34,7 @@ public class HashTableOA extends HashTableData implements HashTable {
     }
 
     @Override
-    public void insert(int key, String value) {
+    public String insert(int key, String value) {
         int hashKey = hashFunction(key);
         int originalHashKey = hashKey;
 
@@ -45,8 +43,7 @@ public class HashTableOA extends HashTableData implements HashTable {
             if (table[hashKey].key == key) {
                 String oldValue = table[hashKey].value;
                 table[hashKey].value = value;
-                System.out.println("Key " + key + " found and its value updated from " + oldValue + " to " + value + ".");
-                return;
+                return "Key " + key + " found and its value updated from " + oldValue + " to " + value + ".";
             }
 
             // Otherwise, keep searching for a free slot using linear probing
@@ -54,39 +51,37 @@ public class HashTableOA extends HashTableData implements HashTable {
 
             // If we have already traversed the entire array of the hash table and did not find a free slot, return
             if (hashKey == originalHashKey) {
-                System.out.println("Element {" + key + ": " + value + "} could not be inserted.");
-                return;
+                return "Element {" + key + ": " + value + "} could not be inserted.";
             }
         }
 
         // If we fond a free slot in the hash table, insert the element
         table[hashKey] = new HashTableData(key, value);
-        System.out.println("Element {" + key + ": " + value + "} successfully inserted.");
-        return;
+        return "Element {" + key + ": " + value + "} successfully inserted.";
     }
 
     @Override
-    public void remove(int key) {
+    public Boolean remove(int key) {
         int hashKey = hashFunction(key);
         int originalHashKey = hashKey;
 
         while (table[hashKey] != null) {
             // If we found the key we are trying to remove, remove it and return
             if (table[hashKey].key == key) {
+                System.out.println("Element {" + key + ": " + table[hashKey].value + "} successfully removed.");
                 table[hashKey] = null;
-                System.out.println("Key " + key + " successfully removed.");
-                return;
+                return true;
             }
 
             // Otherwise, keep searching for the key using linear probing
             hashKey = (hashKey + 1) % size;
 
             // If we have already traversed the entire array of the hash table and did not find the key to be removed, return
-            if (hashKey == originalHashKey) {
-                System.out.println("Key " + key + " not found.");
-                return;
-            }
+            if (hashKey == originalHashKey) break; 
         }
+
+        System.out.println("Key " + key + " could not be removed.");
+        return false;
     }
 
 }
