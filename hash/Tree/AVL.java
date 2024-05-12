@@ -1,3 +1,14 @@
+/*
+ * Joao Pedro Rodrigues Vieira          RA 10403595
+ * Sabrina Midori F. T. de Carvalho     RA 10403595
+ * Pedro Pessuto Rodrigues Ferreira     RA 10409729
+ * Course: Data Structures II           Class 04G11
+ * Professor Andre Kishimoto            Hash Table Project
+ * References:
+    * https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-12/Tabela%20Hash.pdf
+    * https://www.freecodecamp.org/portuguese/news/interfaces-em-java-explicadas-com-exemplos/
+ */
+
 package Tree;
 
 public class AVL extends BST {
@@ -76,59 +87,65 @@ public class AVL extends BST {
         return node2;
     }
 
-    public void insert(int data) {
+    public void insert(Node node) {
         if (isEmpty()) {
-            Node root = new Node(data);
+            Node root = node;
             setRoot(root);
             return;
         }
-        insert(root, data);
+        insert(root, node.getKey(), node.getValue());
     }
 
-    private void insert(Node aux, int data) {
-        if (search(data) != null) throw new RuntimeException();
+    private void insert(Node aux, int key, String value) {
+        if (isEmpty()) {
+            setRoot(aux);
+            return;
+        }
+
+        if (search(key) != null) throw new RuntimeException();
         if (aux == null) return;
 
-        Node node = new Node(data);
+        Node node = new Node(key, value);
 
-        if (aux.getData() < data) {
+        if (aux.getKey() < key) {
             if (aux.getRight() == null) {
                 aux.setRight(node);
                 node.setParent(aux);
-            } else insert(aux.getRight(), data);
+            } else insert(aux.getRight(), key, value);
         }
-        else if (aux.getData() > data) {
+        else if (aux.getKey() > key) {
             if (aux.getLeft() == null) {
                 aux.setLeft(node);
                 node.setParent(aux);
-            } else insert(aux.getLeft(), data);
+            } else insert(aux.getLeft(), key, value);
         }
         balanceTree(node);
     }
 
-    public void remove(int data) {
+    public void remove(int key) {
         if (isEmpty()) {
             System.out.println("Tree is empty.");
             return;
         }
-        Node node = search(data);
+        Node node = search(key);
         Node parent = node.getParent();
 
         if (node.isLeaf()) {
             if (node.isRoot()) setRoot(null);
             else {
-                if (node.getParent().getData() > node.getData()) node.getParent().setLeft(null);
+                if (node.getParent().getKey() > node.getKey()) node.getParent().setLeft(null);
                 else node.getParent().setRight(null);
                 node.setParent(null);
             }
         }
         else {
             if (node.getLeft() != null) {
-                Node predecessor = findPredecessor(data);
-                node.setData(predecessor.getData());
+                Node predecessor = findPredecessor(key);
+                node.setKey(predecessor.getKey());
+                node.setValue(predecessor.getValue());
 
                 if (predecessor.isLeaf()) {
-                    if (predecessor.getParent().getData() >= predecessor.getData()) predecessor.getParent().setLeft(null);
+                    if (predecessor.getParent().getKey() >= predecessor.getKey()) predecessor.getParent().setLeft(null);
                     else predecessor.getParent().setRight(null);
                 } else {
                     node.setLeft(predecessor.getLeft());
@@ -137,11 +154,12 @@ public class AVL extends BST {
                 }
                 predecessor.setParent(null);
             } else {
-                Node successor = findSuccessor(data);
-                node.setData(successor.getData());
+                Node successor = findSuccessor(key);
+                node.setKey(successor.getKey());
+                node.setValue(successor.getValue());
 
                 if (successor.isLeaf()) {
-                    if (successor.getParent().getData() <= successor.getData()) successor.getParent().setRight(null);
+                    if (successor.getParent().getKey() <= successor.getKey()) successor.getParent().setRight(null);
                     else successor.getParent().setLeft(null);
                 } else {
                     node.setRight(successor.getRight());
@@ -160,18 +178,18 @@ public class AVL extends BST {
 
             if (bf > 1) {
                 if (node.getRight().getBalanceFactor() < 0) {
-                    System.out.println("Node " + node.getData() + " (BF = " + node.getBalanceFactor() + "): Rotation RL");
+                    // System.out.println("Node " + node.getKey() + " (BF = " + node.getBalanceFactor() + "): Rotation RL");
                     rotateRightLeft(node);
                 } else {
-                    System.out.println("Node " + node.getData() + " (BF = " + node.getBalanceFactor() + "): Rotation LL");
+                    // System.out.println("Node " + node.getKey() + " (BF = " + node.getBalanceFactor() + "): Rotation LL");
                     rotateLeft(node);
                 }
             } else if (bf < -1) {
                 if (node.getLeft().getBalanceFactor() > 0) {
-                    System.out.println("Node " + node.getData() + " (BF = " + node.getBalanceFactor() + "): Rotation LR");
+                    // System.out.println("Node " + node.getKey() + " (BF = " + node.getBalanceFactor() + "): Rotation LR");
                     rotateLeftRight(node);
                 } else {
-                    System.out.println("Node " + node.getData() + " (BF = " + node.getBalanceFactor() + "): Rotation RR");
+                    // System.out.println("Node " + node.getKey() + " (BF = " + node.getBalanceFactor() + "): Rotation RR");
                     rotateRight(node);
                 }
             }

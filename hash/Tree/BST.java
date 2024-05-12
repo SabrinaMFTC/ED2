@@ -1,3 +1,14 @@
+/*
+ * Joao Pedro Rodrigues Vieira          RA 10403595
+ * Sabrina Midori F. T. de Carvalho     RA 10403595
+ * Pedro Pessuto Rodrigues Ferreira     RA 10409729
+ * Course: Data Structures II           Class 04G11
+ * Professor Andre Kishimoto            Hash Table Project
+ * References:
+    * https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-12/Tabela%20Hash.pdf
+    * https://www.freecodecamp.org/portuguese/news/interfaces-em-java-explicadas-com-exemplos/
+ */
+
 package Tree;
 
 public class BST extends BinaryTree {
@@ -5,15 +16,15 @@ public class BST extends BinaryTree {
     public BST() { super(null); }
     public BST(Node root) { super(root); }
 
-    public Node search(int data) {
+    public Node search(int key) {
         if (isEmpty()) return null;
-        return search(root, data);
+        return search(root, key);
     }
 
-    private Node search(Node node, int data) {
-        if (node == null || node.getData() == data) return node;
-        else if (node.getData() < data) return search(node.getRight(), data);
-        else return search(node.getLeft(), data);
+    private Node search(Node node, int key) {
+        if (node == null || node.getKey() == key) return node;
+        else if (node.getKey() < key) return search(node.getRight(), key);
+        else return search(node.getLeft(), key);
     }
 
     public Node findMin() {
@@ -23,7 +34,7 @@ public class BST extends BinaryTree {
 
     private Node findMin(Node node, Node min) {
         if (node == null) return min;
-        if (node.getData() < min.getData()) min = node;
+        if (node.getKey() < min.getKey()) min = node;
         return findMin(node.getLeft(), min);
     }
 
@@ -34,25 +45,25 @@ public class BST extends BinaryTree {
 
     private Node findMax(Node node, Node max) {
         if (node == null) return max;
-        if (node.getData() > max.getData()) max = node;
+        if (node.getKey() > max.getKey()) max = node;
         return findMax(node.getRight(), max);
     }
 
-    public Node findPredecessor(int data) {
-        Node node = search(data);
+    public Node findPredecessor(int key) {
+        Node node = search(key);
         if (node == null) return null;
 
         // If node is the min value of the tree there is no predecessor
-        if (data == findMin().getData()) return null;
+        if (key == findMin().getKey()) return null;
 
         // If node does not have left subtree
         if (node.getLeft() == null) {
-            // If parent's data is smaller than data, predecessor is node's parent
-            if (node.getParent().getData() < data) return node.getParent();
-            // If parent's data is bigger than data, go up in the tree
+            // If parent's key is smaller than key, predecessor is node's parent
+            if (node.getParent().getKey() < key) return node.getParent();
+            // If parent's key is bigger than key, go up in the tree
             else {
                 while (node.getParent() != null) {
-                    if (node.getParent().getData() < data) return node.getParent();
+                    if (node.getParent().getKey() < key) return node.getParent();
                     else node = node.getParent();
                 }
                 // If node doesn't have predecessor
@@ -68,21 +79,21 @@ public class BST extends BinaryTree {
         return findPredecessor(node.getRight());
     }
 
-    public Node findSuccessor(int data) {
-        Node node = search(data);
+    public Node findSuccessor(int key) {
+        Node node = search(key);
         if (node == null) return null;
 
         // If node is the max value of the tree there is no successor
-        if (data == findMax().getData()) return null;
+        if (key == findMax().getKey()) return null;
 
         // If node does not have right subtree
         if (node.getRight() == null) {
-            // If parent's data is bigger than data, successor is node's parent
-            if (node.getParent().getData() > data) return node.getParent();
-            // If parent's data is smaller than data, go up in the tree
+            // If parent's key is bigger than key, successor is node's parent
+            if (node.getParent().getKey() > key) return node.getParent();
+            // If parent's key is smaller than key, go up in the tree
             else {
                 while (node.getParent() != null) {
-                    if (node.getParent().getData() > data) return node.getParent();
+                    if (node.getParent().getKey() > key) return node.getParent();
                     else node = node.getParent();
                 }
                 // If node doesn't have successor

@@ -1,3 +1,14 @@
+/*
+ * Joao Pedro Rodrigues Vieira          RA 10403595
+ * Sabrina Midori F. T. de Carvalho     RA 10403595
+ * Pedro Pessuto Rodrigues Ferreira     RA 10409729
+ * Course: Data Structures II           Class 04G11
+ * Professor Andre Kishimoto            Hash Table Project
+ * References:
+    * https://profkishimoto.github.io/edii04g11-2024-1/conteudo/semana-12/Tabela%20Hash.pdf
+    * https://www.freecodecamp.org/portuguese/news/interfaces-em-java-explicadas-com-exemplos/
+ */
+
 public class HashTableOA extends HashTableData implements HashTable {
 
     // Fields
@@ -20,7 +31,7 @@ public class HashTableOA extends HashTableData implements HashTable {
         while (table[hashKey] != null) {
             // If we found the key we are looking for, return its value
             if (table[hashKey].key == key) {
-                return "Key " + key + " found. Value = " + table[hashKey].value;
+                return "Key " + key + " found. Value = " + table[hashKey].value + ".";
             }
 
             // Otherwise, keep searching for the key using linear probing
@@ -57,7 +68,7 @@ public class HashTableOA extends HashTableData implements HashTable {
 
         // If we fond a free slot in the hash table, insert the element
         table[hashKey] = new HashTableData(key, value);
-        return "Element {" + key + ": " + value + "} successfully inserted.";
+        return "Element {" + key + ": " + value + "} successfully inserted at index " + hashKey + ".";
     }
 
     @Override
