@@ -1,2 +1,2 @@
 # ED2
-Projects built for Data Structure II Course
+Projects built for Data Structures II Course
